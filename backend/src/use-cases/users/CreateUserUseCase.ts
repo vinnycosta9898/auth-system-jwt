@@ -25,6 +25,9 @@ export class CreateUserUseCase {
         email,
         password: password_hash,
       },
+      select: {
+        id: true,
+      },
     })
 
     return {

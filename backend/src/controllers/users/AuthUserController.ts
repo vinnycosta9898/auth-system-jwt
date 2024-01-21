@@ -27,6 +27,9 @@ export class AuthUserController {
       )
 
       return reply.status(200).send({
+        id: user.id,
+        name: user.name,
+        email: user.email,
         token,
       })
     } catch (err) {

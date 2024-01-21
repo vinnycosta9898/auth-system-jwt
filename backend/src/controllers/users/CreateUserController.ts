@@ -16,7 +16,7 @@ export class CreateUserController {
         password,
       })
 
-      return reply.status(201)
+      return reply.status(201).send({ message: 'User Created' })
     } catch (err) {
       if (err instanceof UserAlreadyExists) {
         return reply.status(409).send({ error: 'User already exists' })
