@@ -1,10 +1,10 @@
 import { prisma } from '../../lib/prisma'
 
-type DetailsUserUseCaseRequest = {
+export type DetailsUserUseCaseRequest = {
   id: string
 }
 
-export class DetailUserUseCase {
+export class DetailsUserUseCase {
   async execute({ id }: DetailsUserUseCaseRequest) {
     const user = await prisma.user.findFirst({
       where: {
