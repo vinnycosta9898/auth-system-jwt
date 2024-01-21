@@ -1,6 +1,7 @@
 import { Prisma } from '@prisma/client'
 import { prisma } from '../../lib/prisma'
 import { hash } from 'bcryptjs'
+import { UserAlreadyExists } from '../../errors/user-already-exists-error'
 
 type CreateUserUseCaseRequest = Prisma.UserCreateInput
 
@@ -13,7 +14,7 @@ export class CreateUserUseCase {
     })
 
     if (hasUserWithSameEmail) {
-      throw new Error('User already exists')
+      throw new UserAlreadyExists()
     }
 
     const password_hash = await hash(password, 8)

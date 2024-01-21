@@ -1,3 +1,4 @@
+import { ResourceNotFound } from '../../errors/resource-not-found-error'
 import { prisma } from '../../lib/prisma'
 
 export type DetailsUserUseCaseRequest = {
@@ -13,7 +14,7 @@ export class DetailsUserUseCase {
     })
 
     if (!user) {
-      throw new Error('Resource not found')
+      throw new ResourceNotFound()
     }
 
     return {

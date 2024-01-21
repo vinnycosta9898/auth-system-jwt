@@ -13,7 +13,11 @@ export async function appRoutes(app: FastifyInstance) {
     return new AuthUserController().handle(req, reply)
   })
 
-  app.get('/me', {onRequest: [verifyJWT]} async (req: FastifyRequest, reply: FastifyReply) => {
-    return new DetailUserController().handle(req, reply)
-  })
+  app.get(
+    '/me',
+    { onRequest: [verifyJWT] },
+    async (req: FastifyRequest, reply: FastifyReply) => {
+      return new DetailUserController().handle(req, reply)
+    },
+  )
 }

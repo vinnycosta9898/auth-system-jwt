@@ -1,3 +1,4 @@
+import { InvalidCredentials } from '../../errors/invalid-credentials-error'
 import { prisma } from '../../lib/prisma'
 import { compare } from 'bcryptjs'
 
@@ -21,7 +22,7 @@ export class AuthUserUseCase {
     const doesPasswordMatches = await compare(password, user.password)
 
     if (!doesPasswordMatches) {
-      throw new Error('Invalid credentials')
+      throw new InvalidCredentials()
     }
 
     return {
