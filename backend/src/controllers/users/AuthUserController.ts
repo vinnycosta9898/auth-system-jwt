@@ -3,6 +3,7 @@ import {
   AuthUserUseCase,
   AuthUserUseCaseProps,
 } from '../../use-cases/users/AuthUserUseCase'
+import { UserNotExists } from '../../errors/user-not-exists-error'
 
 export class AuthUserController {
   async handle(req: FastifyRequest, reply: FastifyReply) {
@@ -11,14 +12,29 @@ export class AuthUserController {
 
       const authUserUseCase = new AuthUserUseCase()
 
-      await authUserUseCase.execute({
+      const { user } = await authUserUseCase.execute({
         email,
         password,
       })
 
-      return reply.status(200)
+      const token = await reply.jwtSign(
+        {},
+        {
+          sign: {
+            sub: user.id,
+          },
+        },
+      )
+
+      return reply.status(200).send({
+        token,
+      })
     } catch (err) {
-      console.log(err)
+      if (err instanceof UserNotExists) {
+        return reply.status(404).send({ error: 'User not exists' })
+      } else {
+        return reply.status(403).send({ error: 'Credentials Invalid' })
+      }
     }
   }
 }

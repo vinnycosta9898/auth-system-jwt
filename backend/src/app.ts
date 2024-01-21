@@ -1,11 +1,17 @@
 import fastify from 'fastify'
 import fastifyJwt from '@fastify/jwt'
+import cors from '@fastify/cors'
 import { appRoutes } from './routes/routes'
 import { env } from './env'
 import { ZodError } from 'zod'
 
 export const app = fastify({
   logger: true,
+})
+
+app.register(cors, {
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-type', 'Authorization'],
 })
 
 app.register(fastifyJwt, {
@@ -15,6 +21,7 @@ app.register(fastifyJwt, {
 app.register(appRoutes)
 
 app.setErrorHandler((error, _request, reply) => {
+  console.log('ERRO', _request)
   if (error instanceof ZodError) {
     return reply
       .status(400)

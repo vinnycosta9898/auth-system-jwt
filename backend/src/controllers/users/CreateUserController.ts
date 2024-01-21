@@ -1,6 +1,7 @@
 import { Prisma } from '@prisma/client'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { CreateUserUseCase } from '../../use-cases/users/CreateUserUseCase'
+import { UserAlreadyExists } from '../../errors/user-already-exists-error'
 
 export class CreateUserController {
   async handle(req: FastifyRequest, reply: FastifyReply) {
@@ -17,7 +18,9 @@ export class CreateUserController {
 
       return reply.status(201)
     } catch (err) {
-      console.log(err)
+      if (err instanceof UserAlreadyExists) {
+        return reply.status(409).send({ error: 'User already exists' })
+      }
     }
   }
 }

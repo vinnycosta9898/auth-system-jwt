@@ -1,4 +1,5 @@
 import { InvalidCredentials } from '../../errors/invalid-credentials-error'
+import { UserNotExists } from '../../errors/user-not-exists-error'
 import { prisma } from '../../lib/prisma'
 import { compare } from 'bcryptjs'
 
@@ -16,7 +17,7 @@ export class AuthUserUseCase {
     })
 
     if (!user) {
-      throw new Error('User not exists')
+      throw new UserNotExists()
     }
 
     const doesPasswordMatches = await compare(password, user.password)

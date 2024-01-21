@@ -1,5 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { DetailsUserUseCase } from '../../use-cases/users/DetailUserUseCase'
+import { ResourceNotFound } from '../../errors/resource-not-found-error'
 
 export class DetailUserController {
   async handle(req: FastifyRequest, reply: FastifyReply) {
@@ -17,7 +18,9 @@ export class DetailUserController {
         },
       })
     } catch (err) {
-      console.log(err)
+      if (err instanceof ResourceNotFound) {
+        return reply.status(404).send({ error: 'User not found' })
+      }
     }
   }
 }
