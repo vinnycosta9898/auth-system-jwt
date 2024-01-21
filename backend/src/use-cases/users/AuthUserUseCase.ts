@@ -1,8 +1,7 @@
-import { Prisma } from '@prisma/client'
 import { prisma } from '../../lib/prisma'
 import { compare } from 'bcryptjs'
 
-type AuthUserUseCaseProps = {
+export type AuthUserUseCaseProps = {
   email: string
   password: string
 }
