@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify'
 
-export function appRoutes(app: FastifyInstance) {
-  app.get('/', () => {
+export async function appRoutes(app: FastifyInstance) {
+  app.post('/', async () => {
     return { hello: true }
   })
 }
