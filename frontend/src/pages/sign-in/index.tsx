@@ -1,7 +1,9 @@
+import { useContext } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { AuthContext } from "@/context/AuthContext";
 
 const signInFormSchema = z.object({
   email: z.string().email({message: 'Email inválido'}),
@@ -11,6 +13,7 @@ const signInFormSchema = z.object({
 type SignInFormData = z.infer<typeof signInFormSchema>
 
 export default function SignIn() {
+  const { signIn } = useContext(AuthContext)
   const { 
           register, 
           handleSubmit, 
@@ -19,8 +22,13 @@ export default function SignIn() {
           resolver: zodResolver(signInFormSchema)
         })
 
-  function handleSignIn(data: SignInFormData){
-    console.log(data)
+  async function handleSignIn(data: SignInFormData){
+    const { email, password } = data
+
+    await signIn({
+      email,
+       password
+    })
   }
 
   return (
