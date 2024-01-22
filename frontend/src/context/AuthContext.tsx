@@ -17,9 +17,17 @@ type SignInProps = {
   password: string
 }
 
+type SignUpProps = {
+  name: string
+  email: string
+  password: string
+}
+
 type AuthContextData = {
   isAuthenticated: boolean
   user: User
+  signIn: (credentials: SignInProps) => void
+  signUp: (credentials: SignUpProps) => void
 }
 
 type AuthProviderProps = {
@@ -59,8 +67,25 @@ export function AuthProvider({ children } : AuthProviderProps){
       toast.error("Email ou senha inválidos")
     }
   }
+
+  async function signUp({ name, email, password}  :SignUpProps){
+    try{
+      const response = await api.post('/signup', {
+        name,
+        email,
+        password
+      })
+
+      if(response.status === 201){
+        toast.success('Conta criada com sucesso')
+        Router.push('/')
+      }
+    }catch(err){
+      toast.error("Erro ao cadastrar usuário")
+    }
+  }
   return(
-    <AuthContext.Provider value={{isAuthenticated, user}}>
+    <AuthContext.Provider value={{isAuthenticated, user, signIn, signUp}}>
 
     </AuthContext.Provider>
   )
