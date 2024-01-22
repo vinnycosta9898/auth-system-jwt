@@ -1,7 +1,7 @@
 import { ReactNode, createContext, useState } from "react";
 import Router from 'next/router'
 
-import { setCookie } from "nookies";
+import { destroyCookie, setCookie } from "nookies";
 import { api } from "@/lib/axios";
 
 import { toast } from "react-toastify";
@@ -35,6 +35,15 @@ type AuthProviderProps = {
 }
 
 export const AuthContext = createContext({} as AuthContextData)
+
+export function signOut(){
+  try{
+    destroyCookie(undefined, '@auth-system-jwt:token')
+    Router.push('/')
+  }catch(err){
+    toast.error('Erro ao deslogar')
+  }
+}
 
 export function AuthProvider({ children } : AuthProviderProps){
   const [user, setUser] = useState<User>({} as User)
