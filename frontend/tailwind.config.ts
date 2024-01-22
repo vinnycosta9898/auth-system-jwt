@@ -8,9 +8,11 @@ const config: Config = {
   ],
   theme: {
     colors:{
-      gray_100: '#020202',
+      gray_100: '#000',
       gray_400: '#212121',
-      green: '#2E8B57',
+
+      green_100: '#2E8B57',
+      green_500: '#93BF85',
       white: '#FFF'
     },
     extend: {
