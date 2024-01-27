@@ -9,6 +9,7 @@ export default function Home(){
       signOut()
     }
   })
+
   return(
     <div className="w-screen h-screen bg-gray_100 flex flex-col items-center">
       <h1 className="text-3xl text-white font-bold mt-16">Seja Bem-vindo</h1>

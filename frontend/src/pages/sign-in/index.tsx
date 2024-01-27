@@ -58,6 +58,7 @@ export default function SignIn() {
           Entrar 
         </button>
       </form>
+      <Link href='/recover-password' className='text-white text-xl mt-4 hover:text-green_500'>Esqueceu a sua senha? Clique aqui!</Link>
       <Link href='/' className='text-white text-xl mt-4 hover:text-green_500'>Não possui uma conta? clique aqui!</Link>
     </div>
   );

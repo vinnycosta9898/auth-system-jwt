@@ -67,7 +67,7 @@ export function AuthProvider({ children } : AuthProviderProps){
           signOut()
         })
     }
-  }, )
+  }, [])
 
   async function signIn({ email, password } : SignInProps){
     try{
