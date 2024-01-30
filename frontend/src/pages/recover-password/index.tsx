@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod"
+import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -44,6 +45,9 @@ export default function RecoverPassword(){
           Enviar E-mail
         </button>
       </form>
+      <Link href="/sign-in" className="text-white">
+        Ir para o Login
+      </Link>
     </div>
   )
 }

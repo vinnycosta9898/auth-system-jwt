@@ -14,6 +14,9 @@ const config: Config = {
       green_100: '#2E8B57',
       green_500: '#93BF85',
 
+      purple_100: '#7140cb',
+      purple_500: '#4b0d9b',
+
       red: '#FF4D4D',
       white: '#FFF'
     },
