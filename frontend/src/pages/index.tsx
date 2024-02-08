@@ -46,7 +46,7 @@ export default function Home() {
   const {
       register,
       handleSubmit,
-      formState: { errors}
+      formState: { isSubmitting, errors}
    } = useForm<FormSignUpData>({
     resolver: zodResolver(formSignUpSchema)
    })
@@ -62,38 +62,38 @@ export default function Home() {
 
   return (
     <div className="w-screen h-screen bg-gradient-to-r from-purple_100 via-purple-500 to-gray_100 flex flex-col items-center justify-center">
-      <form className="w-80 flex flex-col items-center justify-center" onSubmit={handleSubmit(handleSignUp)}>
+      <form className="w-[40rem] h-[40rem] flex flex-col items-center justify-center bg-transparent rounded-lg" onSubmit={handleSubmit(handleSignUp)}>
         <h1 className="text-3xl text-white font-bold mb-8">Crie a sua conta</h1>
         
         <label className="w-80 text-lg text-white mb-2">Nome</label>
         <input 
           type="text" 
-          className="w-80 h-12 rounded-lg outline-none px-2 mb-4"
+          className="w-80 h-12 rounded-lg outline-none px-2 mb-4 bg-transparent text-white"
           {...register('name')}
         />
-        {errors.name && <span className="text-red">{errors.name.message}</span> }
+        {errors.name && <span className="text-red text-center">{errors.name.message}</span> }
         
         <label className="w-80 text-lg text-white mb-2">Email</label>
         <input 
           type="text" 
-          className="w-80 h-12 rounded-lg outline-none px-2 mb-4" 
+          className="w-80 h-12 rounded-lg outline-none px-2 mb-4 bg-transparent text-white" 
           {...register('email')}
         />
-        {errors.email && <span className="text-red">{errors.email.message}</span> }
+        {errors.email && <span className="text-red text-center">{errors.email.message}</span> }
 
         <label className="w-80 text-lg text-white mb-2">Senha</label>
         <input 
           type="password" 
-          className="w-80 h-12 rounded-lg outline-none px-2 mb-4" 
+          className="w-80 h-12 rounded-lg outline-none px-2 mb-4 bg-transparent text-white" 
           {...register('password')}
         />
-        {errors.password && <span className="text-red">{errors.password.message}</span> }
+        {errors.password && <span className="text-red text-center">{errors.password.message}</span> }
 
         
         <label className="w-80 text-lg text-white mb-2">Confirme a sua senha</label>
         <input 
           type="password" 
-          className="w-80 h-12 rounded-lg outline-none px-2 mb-4" 
+          className="w-80 h-12 rounded-lg outline-none px-2 mb-4 bg-transparent text-white" 
           {...register('password_confirmation')}
         />
         {errors.password_confirmation && <span className="text-red text-center">{errors.password_confirmation.message}</span> }
@@ -101,16 +101,17 @@ export default function Home() {
 
         <button 
           type="submit" 
-          className="w-80 h-12 bg-green_100 text-white rounded-lg cursor-pointer mt-4"
+          className={`w-80 h-12 bg-green_100 font-bold text-white rounded-lg cursor-pointer mt-4`}
+          disabled={isSubmitting}
         >
           Crie a sua conta
         </button>
-      </form>
       <Link 
         href='/sign-in' 
         className='text-white text-xl mt-4 hover:text-green_500'>
           Já possui uma conta? clique aqui!
       </Link>
+      </form>
     </div>
   );
 }

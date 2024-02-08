@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     colors:{
       gray_100: '#000',
-      gray_400: '#212121',
+      transparent: '#eeeeee10',
 
       green_100: '#2E8B57',
       green_500: '#93BF85',

@@ -6,8 +6,3 @@
   font-family: Poppins;
 }
 
-.blur{
-  background-color: #ffffff10;
-  backdrop-filter: blur(1px);
-  -webkfit-backdrop-filter: blur(1px);
-}
